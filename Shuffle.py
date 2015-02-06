@@ -1,5 +1,7 @@
 import random
 
+#Shuffle Deck and print to file 
+
 def initDeck():
 	deck = []
 	suits = ["d", "c", "h", "s"]
@@ -8,16 +10,20 @@ def initDeck():
 		for y in cards:
 			deck.append(x+str(y))
 	newdeck = []
-	for y in xrange(0,52):
-		drop = int(random.random()*len(deck))
-		newdeck.append(deck[drop])
-		deck.pop(drop)
+	with open('thedeck.txt', "w") as outputfile:
+		for y in xrange(0,52):
+			drop = int(random.random()*len(deck))
+			newdeck.append(deck[drop])
+ 			
+			outputfile.write("%r \n" % deck.pop(drop))
+
+		          
 	return newdeck
 
-def generateSamples():
+def generateSamples(filename):
 	for x in xrange(0,numSamples):
 		deck = initDeck()
-		openingHand = deck[0] + " " + deck[1]"\n"
+		openingHand = deck[0] + " " + deck[1] + "\n"
 		print openingHand
 
 def readHand(hand):
